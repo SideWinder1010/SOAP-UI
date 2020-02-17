@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="e4ccfa3c-d7c3-4405-b58b-a12af12a858c" activeEnvironment="Default" name="REST _POSTProduct" resourceRoot="" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="b7b9b108-2478-465d-9e39-6ae51cb9aa7c" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://okmry52647dns.eastus.cloudapp.azure.com:8089" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://okmry52647dns.eastus.cloudapp.azure.com:8089</con:endpoint></con:endpoints><con:resource name="" path="/rest/api/product/" id="21941bc9-a768-43cf-aaf9-cd36c9aa0a7f"><con:settings/><con:parameters/><con:method name="1" id="585e002a-d49f-4cfa-960f-b69e66b08d7a" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>400</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>201</con:status><con:params/><con:element xmlns:prod="http://okmry52647dns.eastus.cloudapp.azure.com/rest/api/product/">prod:Response</con:element></con:representation><con:request name="Request 1" id="33e94043-0ced-4b87-9e4f-2fb36866245c" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://okmry52647dns.eastus.cloudapp.azure.com:8089</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="aad34fbf-2082-429c-9077-c5bf5a2527f9" name="PostProduct"><con:description>TestSuite generated for REST Service [http://okmry52647dns.eastus.cloudapp.azure.com:8089]</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="926dff84-f0f4-4018-a995-07e4c265a215" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="POST_reading bodyData from Excel" searchProperties="true"><con:description>TestCase generated for REST Resource [] located at [/rest/api/product/]</con:description><con:settings/><con:testStep type="restrequest" name="Post Request" id="d85e1611-ec18-4d5c-832a-5d9046cee92d"><con:settings/><con:config service="http://okmry52647dns.eastus.cloudapp.azure.com:8089" methodName="1" resourcePath="/rest/api/product/" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Post Request" id="660ab0cf-7040-4d7e-9da5-ae0be718ebcb" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://okmry52647dns.eastus.cloudapp.azure.com:8089</con:endpoint><con:request>{
+  "availability": true,
+  "categoryId": 2,
+  "color": "blue",
+  "createdOn": "",
+  "description": "",
+  "discount": 0,
+  "materialDescription": "",
+  "name": "Chair",
+  "price": 100,
+  "updateOn": "",
+  "warranty": 0
+}</con:request><con:originalUri>http://okmry52647dns.eastus.cloudapp.azure.com/rest/api/product/</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="properties" name="ExcelSheetProperty" id="8997a6b0-1402-47af-b587-1527cb3fd5ea"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties/></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script_Reading data from the excel" id="332cf17a-6eff-499e-b48a-def47faf34ba"><con:settings/><con:config><script>// import ibraries we need
+
+import com.eviware.soapui.support.XmlHolder
+import jxl.*
+import jxl.write.*
+import org.apache.poi.*
+import org.apache.poi.ss.usermodel.*
+import org.apache.poi.xssf.usermodel.*
+import org.apache.poi.hssf.usermodel.*
+import org.apache.poi.SS.util.*
+//Declare the variables
+//myTestCase contains the test case
+def myTestCase = context.testCase
+
+//Variable used to handle the loop and move inside the file
+def counter,next,previous,size,colSize
+
+//File containing the data
+Workbook workbook1 =Workbook.getWorkbook(new File("C:\\Users\\sdetlabs\\Downloads\\Hello.xls"))
+
+//Index 0 will read first sheet from the workbook
+Sheet sheet1 = workbook1.getSheet(0)
+
+//get number of rows and columns in the sheet
+size = sheet1.getRows().toInteger()
+colsize =sheet1.getColumns()
+
+//Get property test step object
+
+propTestStep = myTestCase.getTestStepByName("ExcelSheetProperty")
+
+//Defining column and row size for the loop
+valColNum =colSize-1
+propColNum = colSize-2
+
+//inserting data in prop file using for loop
+for(int r=1;r&lt;=size-1;r++)
+//Obtaining data we need
+{
+	cellVal =sheet1.getCell(valColNum,r).getContents() //getCell(column,row)// Obtains Field 1
+	propVal =sheet1.getCell(propColNum,r).getContents() //getCell(clumn,row) // obtains field 1
+	propTestStep.setPropertyValue(propVal,cellVal)
+
+}
+Workbook1.close()//Close the file</script></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="8c431b75-dd17-4467-a984-513c6c53f737" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="POST inserting and fetching data from db" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script_Reading data from db" id="d71433f3-e9b4-4c60-89fc-3cbdbc49d21f"><con:settings/><con:config><script>import groovy.sql.Sql
+com.eviware.soapui.support.GroovyUtils.registerJdbcDriver("com.mysql.jdbc.Driver")
+
+log.info("First")
+
+try{
+	def dbReaderTest=context.testCase
+	def sql=Sql.newInstance("jdbc:mysql://127.0.0.1/furnitureappdb","root",'Welcome123$',"com.mysql.jdbc.Driver")
+	log.info("second")
+
+	def frow =sql.firstRow("select * from furitureorderdetails")
+	log.info("Third")
+
+	productId=frow.ProductId;
+	Name=frow.name;
+	Color =frow.color;
+	Price =frow.Price;
+
+//Storing the values in property file
+
+
+	log.info(Price)
+	propTestStep=dbReaderTest.getTestStepByName("PropertiesDB")
+	propTestStep.setPropertyValue("ProductID",productId.toString())
+	propTestStep.setPropertyValue("Color",Color.toString())
+
+	log.info(productId)
+
+	sql.close()
+	
+	}
+catch(Exception e)
+{
+	log.info(e)
+}
+</script></con:config></con:testStep><con:testStep type="properties" name="PropertiesDB" id="4856b28a-4966-4f33-aa50-ab1cc7fe7664"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>ProductID</con:name><con:value>2</con:value></con:property><con:property><con:name>Color</con:name><con:value>Blue</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="restrequest" name="PostDB Request" id="7924be69-4271-4dbd-9b52-0a05e40ee659"><con:settings/><con:config service="http://okmry52647dns.eastus.cloudapp.azure.com:8089" methodName="1" resourcePath="/rest/api/product/" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="PostDB Request" id="94dfa384-f8c5-4464-9fd3-978d29e27b10" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://okmry52647dns.eastus.cloudapp.azure.com:8089</con:endpoint><con:request>{
+  "availability": true,
+  "categoryId": ${ProductID},
+  "color": "${color}",
+  "createdOn": "",
+  "description": "",
+  "discount": 0,
+  "materialDescription": "",
+  "name": "Chair",
+  "price": 100,
+  "updateOn": "",
+  "warranty": 0
+}</con:request><con:originalUri>http://okmry52647dns.eastus.cloudapp.azure.com/rest/api/product/</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script_Inserting valuesin DB" id="2e032c0a-a666-49f5-a720-9f1ac4381ff7"><con:settings/><con:config><script>import groovy.sql.Sql
+com.eviware.soapui.support.GroovyUtils.registerJdbcDriver("com.mysql.jdbc.Driver")
+import com.eviware.soapui.support.*
+import groovy.json.JsonSlurper
+import jxl.*
+import jxl.write.*
+
+//Converting Json Response to String
+def response =context.expand('${PostDB Request#Response}').toString()
+def slurper =new JsonSlurper()
+def GetAllProducts=context.testCase
+def runner
+def counterAssets
+
+
+try{
+	def dbWriterTest=context.testCase
+	def json = slurper.parseText response
+
+	name=json.body.name
+	log.info(name)
+	
+	def sql=Sql.newInstance("jdbc:mysql://127.0.0.1/furnitureappdb","root",'Welcome123$',"com.mysql.jdbc.Driver")
+	log.info("second")
+
+	sql.execute("insert into furitureorderdetails(Name,Color,price) values(?,?,?)",[name.toString(),"Blue",109])
+
+	sql.close()
+	
+	}
+catch(Exception e)
+{
+	log.info(e)
+}
+</script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

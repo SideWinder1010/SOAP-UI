@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="d64c9512-6bf6-4b5f-9bc5-3a3ea9644ed2" activeEnvironment="Default" name="REST_GetProduct" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Report Format(s)" value=""/>
+  <con:entry key="Host:Port" value=""/>
+  <con:entry key="Export JUnit Results" value="false"/>
+  <con:entry key="Export All" value="false"/>
+  <con:entry key="Save After" value="false"/>
+  <con:entry key="Add Settings" value="false"/>
+  <con:entry key="WSS Password Type" value=""/>
+  <con:entry key="TestSuite" value="ProductTesting"/>
+  <con:entry key="Endpoint" value=""/>
+  <con:entry key="Select Report Type" value=""/>
+  <con:entry key="System Properties" value=""/>
+  <con:entry key="Password" value=""/>
+  <con:entry key="Print Report" value="false"/>
+  <con:entry key="Open Report" value="false"/>
+  <con:entry key="Export JUnit Results with test properties" value="false"/>
+  <con:entry key="Global Properties" value=""/>
+  <con:entry key="Project Properties" value=""/>
+  <con:entry key="Project Password" value=""/>
+  <con:entry key="TestCase" value="GetAllProducts"/>
+  <con:entry key="Username" value=""/>
+  <con:entry key="user-settings.xml Password" value=""/>
+  <con:entry key="TestRunner Path" value=""/>
+  <con:entry key="Environment" value="Default"/>
+  <con:entry key="Coverage Report" value="false"/>
+  <con:entry key="Enable UI" value="false"/>
+  <con:entry key="Root Folder" value=""/>
+  <con:entry key="Ignore Errors" value="false"/>
+  <con:entry key="Domain" value=""/>
+  <con:entry key="Tool Args" value=""/>
+  <con:entry key="Save Project" value="false"/>
+</xml-fragment>]]></con:setting></con:settings><con:interface xsi:type="con:RestService" id="b222ed45-cc84-4f05-8d5f-eb3ce2c046e4" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://okmry52647dns.eastus.cloudapp.azure.com:8089" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://okmry52647dns.eastus.cloudapp.azure.com:8089</con:endpoint></con:endpoints><con:resource name="" path="/rest/api/product/all" id="18cdf61a-ebeb-4796-a1ba-a0ef4e06113c"><con:settings/><con:parameters/><con:method name="1" id="a2768236-6fc4-467b-b75c-e6b987097a96" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:all="http://okmry52647dns.eastus.cloudapp.azure.com/rest/api/product/all">all:Response</con:element></con:representation><con:request name="Request 1" id="17201087-7b73-4244-89a9-98054c92e2d3" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://okmry52647dns.eastus.cloudapp.azure.com:8089</con:endpoint><con:request/><con:originalUri>http://okmry52647dns.eastus.cloudapp.azure.com/rest/api/product/all</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="bf29be98-0faa-4832-a3c3-467d13c8c3ed" name="ProductTesting"><con:description>TestSuite generated for REST Service [http://okmry52647dns.eastus.cloudapp.azure.com:8089]</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="001ac2a5-ba37-42c0-8d68-badc6825ecbc" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="GetAllProducts" searchProperties="true"><con:description>TestCase generated for REST Resource [] located at [/rest/api/product/all]</con:description><con:settings/><con:testStep type="restrequest" name="GetRequest" id="f4f15b16-cf02-4507-aa9b-f7e127ac5389"><con:settings/><con:config service="http://okmry52647dns.eastus.cloudapp.azure.com:8089" resourcePath="/rest/api/product/all" methodName="1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GetRequest" id="17201087-7b73-4244-89a9-98054c92e2d3" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://okmry52647dns.eastus.cloudapp.azure.com:8089</con:endpoint><con:request/><con:originalUri>http://okmry52647dns.eastus.cloudapp.azure.com/rest/api/product/all</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="18a9cfce-8305-45fb-a70f-a37e9be8003c" name="Valid HTTP Status Codes"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="properties" name="Properties" id="defc5b39-f99a-487a-bb86-06e8fddb601e"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>pid</con:name><con:value>1</con:value></con:property><con:property><con:name>name</con:name><con:value>Marriot furniture</con:value></con:property><con:property><con:name>price</con:name><con:value>2000</con:value></con:property><con:property><con:name>discount</con:name><con:value>20</con:value></con:property><con:property><con:name>newPrice</con:name><con:value>1600</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script_GetRequestVal" id="25a251a2-cb7e-432a-8c7e-a3c91f826d22"><con:settings/><con:config><script>import com.eviware.soapui.support.*
+import groovy.json.JsonSlurper
+import jxl.*
+import jxl.write.*
+
+//Converting Json Response to String
+def response =context.expand('${GetRequest#Response}').toString()
+def slurper =new JsonSlurper()
+def json = slurper.parseText response
+def GetAllProducts=context.testCase
+def runner
+def counterAssets
+
+
+
+//Getting size of json response
+
+counterAssets=json.body.size()
+log.info(counterAssets)
+
+//Reading propert values from Custom files
+
+propTest=GetAllProducts.getTestStepByName("Properties")
+
+pidProp=propTest.getPropertyValue("pid").toString()
+nameProp=propTest.getPropertyValue("name").toString()
+priceProp=propTest.getPropertyValue("price").toString()
+discountProp=propTest.getPropertyValue("discount").toString()
+newPriceProp=propTest.getPropertyValue("newPrice").toString()
+
+//Validating Json response matches the custome properties
+// Comparing the pid value
+def pid=json.body.pid[0]
+def pidStr=pid.toString()
+
+if(pidStr==pidProp)
+{
+	log.info("Pass")
+}
+else
+{
+	log.info("Fail")
+}
+
+//comparing the name
+
+def name=json.body.name[0]
+nameStr=name.toString().trim()
+if(nameStr==nameProp.toString().trim())
+{
+	log.info("Pass")
+}
+else
+{
+	log.info("Fail")
+}
+
+//Comaring the price
+
+def price=json.body.price[0]
+def priceStr=price.toString()
+
+if(priceStr==priceProp)
+{
+	log.info("Pass")
+}
+else
+{
+	log.info("Fail")
+}
+
+//Comaring the discount
+
+def discount=json.body.discount[0]
+def discountStr=discount.toString()
+
+if(discountStr==discountProp)
+{
+	log.info("Pass")
+}
+else
+{
+	log.info("Fail")
+}
+
+
+</script></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="3a640b44-842f-40a0-ba6c-71d94b8b88ed" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="PostProduct" searchProperties="true"><con:settings/><con:properties/></con:testCase><con:testCase id="64fa440b-6bcf-4a63-b26d-a82f5b4182b0" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="UpdateProduct" searchProperties="true"><con:settings/><con:properties/></con:testCase><con:testCase id="789639ed-023c-40ab-ab87-54005403547f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="DeleteProduct" searchProperties="true"><con:settings/><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="177027b1-44b0-4569-b604-3349adb061c6" activeEnvironment="Default" name="REST PUTProduct" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="ca43f900-8126-485e-8ac5-1626a382a654" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://okmry52647dns.eastus.cloudapp.azure.com:8089" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://okmry52647dns.eastus.cloudapp.azure.com:8089</con:endpoint></con:endpoints><con:resource name="" path="/rest/api/product/1" id="bf625247-e91e-47e7-91af-1a2f14e7899e"><con:settings/><con:parameters/><con:method name="1" id="2fea62e7-4460-4a82-928d-894897922b85" method="PUT"><con:settings/><con:parameters/><con:request name="Request 1" id="1fe9d371-c474-4a69-a5af-275cf3711a7e" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://okmry52647dns.eastus.cloudapp.azure.com:8089</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="787a46fe-054c-4ae1-af6e-2b53a438c8ed" name="Put_Request"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="44a97f0c-4a77-4510-aecc-9473ae1f3b65" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="PUT_DeleteRequestGroovy" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script_PUT" id="763a532d-7bdd-4ad8-a6e2-2ebe68af2214"><con:settings/><con:config><script>import static com.eviware.soapui.impl.wsdl.teststeps.registry.HttpRequestStepFactory.HTTPREQUEST_TYPE
+import groovy.json.JsonSlurper 
+//Provide the http request endpoint in the below
+def endpoint = 'http://okmry52647dns.eastus.cloudapp.azure.com:8089/rest/api/product/2'
+Random randomGenerator = new Random();
+int value = randomGenerator.nextInt(10000);
+
+
+//Valid http method GET | PUT | POST | DELETE etc
+def method ='PUT'
+def methodDelete = 'DELETE'
+def stepName = 'PUTRequest'+value
+def tc=testRunner.testCase
+//Adds http request step to given test case assumes tc is valid object of TestCase
+tc.addTestStep(HTTPREQUEST_TYPE , stepName, endpoint, method)
+
+//tc.addTestStep(HTTPREQUEST_TYPE , stepName, endpoint, method)
+ 
+//Add TestCase Property
+testRunner.testCase.setPropertyValue("UserName", "testUser"+value)
+ 
+//Setting Put Body
+def request = context.testCase.getTestStepByName(stepName).getTestRequest()
+//def jsonText = '{"name":"${#TestCase#UserName}","availability": "true","color": "Red","description": "Just Try this","discount": 0,"materialDescription": "very good","name": "Chair420","price": 100,"updateOn": "Yesterday","warranty": 1}'
+def jsonText ='{ "availability": true, "categoryId": 2, "color": "blue", "createdOn": "", "description": "", "discount": 0, "materialDescription": "", "name": "string", "price": 100, "updateOn": "", "warranty": 0 }'
+
+context.testCase.getTestStepByName(stepName).testRequest.setMediaType('application/json')
+request.setRequestContent(jsonText)
+ 
+testRunner.runTestStepByName("PUTRequest"+value);
+ 
+responseContent = testRunner.testCase.getTestStepByName("PUTRequest"+value).getPropertyValue("response")
+slurperresponse = new JsonSlurper().parseText(responseContent)
+ 
+//To Read the Name Value in Response
+String ResUName=slurperresponse.name.toString();
+testRunner.testCase.setPropertyValue("ResUserName", ResUName)
+ 
+//To Read the id Value in Response
+String RID=slurperresponse.id.toString();
+testRunner.testCase.setPropertyValue("ResID", RID)
+ 
+//slurperresponse.id.toString()
+log.info (slurperresponse.toString())
+
+
+</script></con:config></con:testStep><con:testStep type="httprequest" name="PUTRequest5645" id="9bfc9ef9-c6b6-4c34-b34b-87f58dba51a2"><con:settings/><con:config method="PUT" xsi:type="con:HttpRequest" id="204f1903-6275-44d8-ac6f-6654da1466f6" name="PUTRequest5645" mediaType="application/json" postQueryString="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:endpoint>http://okmry52647dns.eastus.cloudapp.azure.com:8089/rest/api/product/2</con:endpoint><con:request>{ "availability": true, "categoryId": 2, "color": "blue", "createdOn": "", "description": "", "discount": 0, "materialDescription": "", "name": "string", "price": 100, "updateOn": "", "warranty": 0 }</con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="groovy" name="Groovy_DELETE" id="98e2d6d3-98e4-4af3-af5b-7c6abda63448"><con:settings/><con:config><script>import static com.eviware.soapui.impl.wsdl.teststeps.registry.HttpRequestStepFactory.HTTPREQUEST_TYPE
+import groovy.json.JsonSlurper 
+//Provide the http request endpoint in the below
+Random randomGenerator = new Random();
+int valnew =randomGenerator.nextInt(1000)
+//val1=long.valueOf(valnew);
+
+def endpoint = 'http://okmry52647dns.eastus.cloudapp.azure.com:8089/rest/api/product/'+valnew.toString()
+int value = randomGenerator.nextInt(10000);
+
+
+//Valid http method GET | PUT | POST | DELETE etc
+def method ='PUT'
+def methodDelete = 'DELETE'
+def stepName = 'httpRequestStep'+value
+def tc=testRunner.testCase
+//Adds http request step to given test case assumes tc is valid object of TestCase
+tc.addTestStep(HTTPREQUEST_TYPE , stepName, endpoint, methodDelete)
+
+//tc.addTestStep(HTTPREQUEST_TYPE , stepName, endpoint, method)
+ 
+//Add TestCase Property
+testRunner.testCase.setPropertyValue("UserName", "testUser"+value)
+ 
+//Setting Post Body
+def request = context.testCase.getTestStepByName(stepName).getTestRequest()
+//def jsonText = '{"name":"${#TestCase#UserName}","availability": "true","color": "Red","description": "Just Try this","discount": 0,"materialDescription": "very good","name": "Chair420","price": 100,"updateOn": "Yesterday","warranty": 1}'
+def jsonText ='{ "availability": true, "categoryId": 2, "color": "blue", "createdOn": "", "description": "", "discount": 0, "materialDescription": "", "name": "string", "price": 100, "updateOn": "", "warranty": 0 }'
+
+context.testCase.getTestStepByName(stepName).testRequest.setMediaType('application/json')
+//request.setRequestContent(jsonText)
+ 
+testRunner.runTestStepByName("httpRequestStep"+value);
+ 
+responseContent = testRunner.testCase.getTestStepByName("httpRequestStep"+value).getPropertyValue("response")
+slurperresponse = new JsonSlurper().parseText(responseContent)
+ 
+//To Read the Name Value in Response
+String ResUName=slurperresponse.name.toString();
+testRunner.testCase.setPropertyValue("ResUserName", ResUName)
+ 
+//To Read the id Value in Response
+String RID=slurperresponse.id.toString();
+testRunner.testCase.setPropertyValue("ResID", RID)
+ 
+//slurperresponse.id.toString()
+log.info (slurperresponse.toString())
+
+
+</script></con:config></con:testStep><con:testStep type="httprequest" name="PUTRequest2640" id="43918078-fb13-4283-b6f2-88f388b99dfe"><con:settings/><con:config method="PUT" xsi:type="con:HttpRequest" id="9fcca2d9-5b4f-49d4-8201-397ce7659eb6" name="PUTRequest2640" mediaType="application/json" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:endpoint>http://okmry52647dns.eastus.cloudapp.azure.com:8089/rest/api/product/2</con:endpoint><con:request>{ "availability": true, "categoryId": 2, "color": "blue", "createdOn": "", "description": "", "discount": 0, "materialDescription": "", "name": "string", "price": 100, "updateOn": "", "warranty": 0 }</con:request><con:parameters/></con:config></con:testStep><con:properties><con:property><con:name>UserName</con:name><con:value>testUser2640</con:value></con:property><con:property><con:name>ResUserName</con:name><con:value>null</con:value></con:property><con:property><con:name>ResID</con:name><con:value>null</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
